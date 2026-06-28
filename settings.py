@@ -1,0 +1,19 @@
+# Configurações do jogo
+
+WIDTH = 1280
+HEIGHT = 720
+
+FPS = 60
+
+TITLE = "Forest Escape"
+
+WHITE = (255,255,255)
+BLACK = (0,0,0)
+RED = (220,50,50)
+GREEN = (0,180,0)
+BLUE = (135,206,235)
+BROWN = (139,69,19)
+
+GRAVITY = 0.8
+PLAYER_SPEED = 6
+JUMP_FORCE = -16
