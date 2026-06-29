@@ -1,25 +1,20 @@
-# Configurações do jogo
+# settings.py
 
-WIDTH = 1280
-HEIGHT = 720
+# Dimensões da tela
+WIDTH = 800
+HEIGHT = 600
 
+# Taxa de atualização (Frames per second)
 FPS = 60
 
-TITLE = "Forest Escape"
+# Título da janela
+TITLE = "Demo - Jogo de Plataforma"
 
-WHITE = (255,255,255)
-BLACK = (0,0,0)
-RED = (220,50,50)
-GREEN = (0,180,0)
-BLUE = (135,206,235)
-BROWN = (139,69,19)
+# Cores básicas (RGB)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+YELLOW = (255, 255, 0)
+BLUE = (50, 150, 255)
 
-GRAVITY = 0.8
-PLAYER_SPEED = 6
-JUMP_FORCE = -16
-
-PLAYER_WIDTH = 40
-PLAYER_HEIGHT = 50
-
-ENEMY_WIDTH = 40
-ENEMY_HEIGHT = 50
+# Tamanho padrão dos blocos do mapa
+TILE_SIZE = 50

@@ -1,55 +1,51 @@
+# player.py
 import pygame
 from settings import *
 
-
-class Player:
-
-    def __init__(self, image):
-
-        self.image = pygame.transform.scale(image, (50, 50))
-
-        self.rect = pygame.Rect(100, 500, 40, 50)
-
-        self.vel_y = 0
-
+class Player(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        try:
+            self.image = pygame.image.load("assets/images/player/player.png").convert_alpha()
+            self.image = pygame.transform.scale(self.image, (40, 40))
+        except:
+            self.image = pygame.Surface((40, 40))
+            self.image.fill((0, 255, 0))
+            
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.direction = pygame.math.Vector2(0, 0)
+        self.speed = 5
+        self.gravity = 0.8
+        self.jump_speed = -16
         self.on_ground = False
+        
+        # Sistema de invulnerabilidade para não perder várias vidas de uma vez
+        self.invulnerable = False
+        self.hurt_time = 0
 
-
-    def update(self, platforms):
-
+    def get_input(self):
         keys = pygame.key.get_pressed()
-
-        dx = 0
-
-        if keys[pygame.K_a] or keys[pygame.K_LEFT]:
-            dx = -PLAYER_SPEED
-
-        if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-            dx = PLAYER_SPEED
-
-        self.rect.x += dx
+        if keys[pygame.K_RIGHT]:
+            self.direction.x = 1
+        elif keys[pygame.K_LEFT]:
+            self.direction.x = -1
+        else:
+            self.direction.x = 0
 
         if keys[pygame.K_SPACE] and self.on_ground:
-            self.vel_y = JUMP_FORCE
+            self.direction.y = self.jump_speed
             self.on_ground = False
 
-        self.vel_y += GRAVITY
+    def apply_gravity(self):
+        self.direction.y += self.gravity
+        self.rect.y += self.direction.y
 
-        self.rect.y += self.vel_y
+    def cooldowns(self):
+        if self.invulnerable:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.hurt_time >= 1000: # 1 segundo de proteção
+                self.invulnerable = False
 
-        self.on_ground = False
-
-        for platform in platforms:
-
-            if self.rect.colliderect(platform):
-
-                if self.vel_y > 0:
-
-                    self.rect.bottom = platform.top
-                    self.vel_y = 0
-                    self.on_ground = True
-
-
-    def draw(self, screen):
-
-        screen.blit(self.image, (self.rect.x - 5, self.rect.y))
+    def update(self):
+        self.get_input()
+        self.cooldowns()

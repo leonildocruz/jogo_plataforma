@@ -1,42 +1,24 @@
+# menu.py
+
 import pygame
 from settings import *
 
-class Menu:
-
-    def __init__(self):
-
-        self.title_font = pygame.font.SysFont("arial", 60, True)
-        self.font = pygame.font.SysFont("arial", 28)
-
-    def draw(self, screen):
-
-        screen.fill((70, 170, 255))
-
-        title = self.title_font.render("FOREST ESCAPE", True, WHITE)
-
-        play = self.font.render(
-            "Pressione ENTER para iniciar",
-            True,
-            WHITE
-        )
-
-        controls = self.font.render(
-            "A/D ou Setas = Andar | ESPACO = Pular",
-            True,
-            WHITE
-        )
-
-        screen.blit(
-            title,
-            (WIDTH//2 - title.get_width()//2, 140)
-        )
-
-        screen.blit(
-            play,
-            (WIDTH//2 - play.get_width()//2, 280)
-        )
-
-        screen.blit(
-            controls,
-            (WIDTH//2 - controls.get_width()//2, 360)
-        )
+def draw_menu(screen):
+    screen.fill(BLACK) # Preenche o fundo de preto
+    
+    # Configuração das fontes
+    font_title = pygame.font.SysFont(None, 64)
+    font_text = pygame.font.SysFont(None, 36)
+    
+    # Renderiza os textos
+    title_surface = font_title.render("JOGO DE PLATAFORMA", True, WHITE)
+    
+    # Texto obrigatório com os controles
+    controls_surface = font_text.render("Comandos: Setas - Mover | Espaço - Pular", True, WHITE)
+    
+    start_surface = font_text.render("Pressione ENTER para começar", True, YELLOW)
+    
+    # Posiciona os textos no centro da tela
+    screen.blit(title_surface, (WIDTH//2 - title_surface.get_width()//2, 150))
+    screen.blit(controls_surface, (WIDTH//2 - controls_surface.get_width()//2, 300))
+    screen.blit(start_surface, (WIDTH//2 - start_surface.get_width()//2, 450))
