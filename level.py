@@ -7,20 +7,22 @@ class Level:
 
         self.platforms = [
 
-            pygame.Rect(0, HEIGHT-80, WIDTH, 80),      # chão
+            # Chão
+            pygame.Rect(0, HEIGHT - 80, WIDTH, 80),
 
-            pygame.Rect(250, 550, 200, 30),
-
-            pygame.Rect(550, 450, 220, 30),
-
-            pygame.Rect(900, 350, 220, 30),
-
-            pygame.Rect(500, 250, 180, 30),
+            # Plataformas
+            pygame.Rect(220, 560, 180, 20),
+            pygame.Rect(470, 470, 180, 20),
+            pygame.Rect(760, 390, 180, 20),
+            pygame.Rect(1030, 300, 180, 20),
 
         ]
 
-
     def draw(self, screen):
 
-        for platform in self.platforms:
-            pygame.draw.rect(screen, BROWN, platform)
+        # Chão
+        pygame.draw.rect(screen, (100, 70, 30), self.platforms[0])
+
+        # Plataformas
+        for platform in self.platforms[1:]:
+            pygame.draw.rect(screen, (120, 90, 40), platform)
